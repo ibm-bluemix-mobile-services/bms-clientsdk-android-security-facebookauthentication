@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.ibm.mobileclientaccess.clientsdk.android.auth.facebook.test" >
+
+    <uses-sdk
+        android:minSdkVersion="15"
+        android:targetSdkVersion="21" />
+
+    <instrumentation
+        android:name="android.test.InstrumentationTestRunner"
+        android:functionalTest="false"
+        android:handleProfiling="false"
+        android:label="Tests for com.ibm.mobileclientaccess.clientsdk.android.auth.facebook.test"
+        android:targetPackage="com.ibm.mobileclientaccess.clientsdk.android.auth.facebook.test" />
+
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:label="@string/app_name" >
+        <uses-library android:name="android.test.runner" />
+    </application>
+
+</manifest>
