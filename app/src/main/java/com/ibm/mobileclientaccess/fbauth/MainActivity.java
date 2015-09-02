@@ -22,10 +22,11 @@ import android.widget.TextView;
 
 import com.ibm.mobileclientaccess.clientsdk.android.auth.facebook.MCAFacebookAuthenticationManager;
 import com.ibm.mobilefirstplatform.clientsdk.android.core.api.BMSClient;
-import com.ibm.mobilefirstplatform.clientsdk.android.core.api.FailResponse;
 import com.ibm.mobilefirstplatform.clientsdk.android.core.api.Response;
 import com.ibm.mobilefirstplatform.clientsdk.android.core.api.ResponseListener;
 import com.ibm.mobilefirstplatform.clientsdk.android.security.api.AuthorizationManager;
+
+import org.json.JSONObject;
 
 import java.net.MalformedURLException;
 
@@ -57,15 +58,7 @@ public class MainActivity extends Activity implements
         findViewById(R.id.disconnect).setOnClickListener(this);
 
         try {
-
-            //[imfClient initializeWithBackendRoute:@"https://AsafAppUnAuth.stage1.mybluemix.net?subzone=dev" backendGUID:@"a23e3fed-b3e7-4bc6-8662-80fa1fac446f"];
-//            BMSClient.getInstance().initialize(this, "https://AsafAppUnAuth.stage1.mybluemix.net?subzone=dev","a23e3fed-b3e7-4bc6-8662-80fa1fac446f");
-
             BMSClient.getInstance().initialize(this, "http://ilans-mbp.haifa.ibm.com:9080","ilan1234");
-
-            //BMSClient.getInstance().initialize("https://CirillApp.stage1.mybluemix.net?subzone=dev","a2b53579-a061-4c9b-ac10-c5b402a18e8e");
-            //{"applicationID":"a2b53579-a061-4c9b-ac10-c5b402a18e8e","applicationRoute":"https://CirillApp.mybluemix.net"}
-            //BMSClient.getInstance().initialize("http://9.148.225.236:9080", "ilan1234");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -84,7 +77,7 @@ public class MainActivity extends Activity implements
             }
 
             @Override
-            public void onFailure(FailResponse response, Throwable t) {
+            public void onFailure(Response response, Throwable t, JSONObject extendedInfo){
                 if (response != null){
                     Log.e("onFailure Response", response.toString());
                 }
@@ -154,7 +147,7 @@ public class MainActivity extends Activity implements
     }
 
     @Override
-    public void onFailure(FailResponse response, Throwable t) {
+    public void onFailure(Response response, Throwable t, JSONObject extendedInfo) {
         final TextView tmpInfo = this.info;
         runOnUiThread(new Runnable() {
             @Override

@@ -27,5 +27,11 @@ public interface MCAFacebookAuthentication {
      */
     void handleAuthentication(Context context, String appId);
 
+    /**
+     * When the Facebook activity ends, it sends a result and that result needs to be transferred to the facebook code,
+     * @param requestCode the intent request code
+     * @param resultCode the result
+     * @param data the data (if any)
+     */
     void onActivityResultCalled(int requestCode, int resultCode, Intent data);
 }

@@ -93,5 +93,6 @@
     <orderEntry type="library" exported="" name="bolts-android-1.1.4" level="project" />
     <orderEntry type="library" exported="" name="okio-1.4.0" level="project" />
     <orderEntry type="module" module-name="lib" exported="" />
+    <orderEntry type="module" module-name="bms_core" exported="" />
   </component>
 </module>

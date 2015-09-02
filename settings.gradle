@@ -1,1 +1,3 @@
-include ':app', ':lib', ':bms_core'
+include ':app', ':lib'
+include ':bms_core'
+project(':bms_core').projectDir = new File('../bms-clientsdk-android-core/lib/')
