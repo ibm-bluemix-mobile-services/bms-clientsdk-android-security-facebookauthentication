@@ -21,9 +21,10 @@ import android.content.Intent;
 public interface MCAFacebookAuthentication {
 
     /**
-     * Signs-in to Facebook and sends the Facebook access token back to the authentication handler.
+     * Signs-in to Facebook as identity provider and sends the access token back to the authentication handler.
      *
      * @param appId                 The Facebook app id.
+     * @param  context context to pass for request resources
      */
     void handleAuthentication(Context context, String appId);
 

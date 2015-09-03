@@ -43,12 +43,7 @@ public class MainActivity extends Activity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-//        FacebookSdk.sdkInitialize(getApplicationContext());
-//        callbackManager = CallbackManager.Factory.create();
-
         setContentView(R.layout.activity_main);
-
         infoTextView = (TextView)findViewById(R.id.info);
 
         /*

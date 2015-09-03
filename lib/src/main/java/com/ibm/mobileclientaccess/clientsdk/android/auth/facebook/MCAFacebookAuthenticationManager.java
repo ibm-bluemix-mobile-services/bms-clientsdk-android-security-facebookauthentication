@@ -44,17 +44,17 @@ public class MCAFacebookAuthenticationManager implements
     private AuthenticationContext authContext;
 
     public static MCAFacebookAuthenticationManager getInstance() {
-        MCAFacebookAuthenticationManager r = instance;
-        if (r == null) {
+        MCAFacebookAuthenticationManager tempManagerInstance = instance;
+        if (tempManagerInstance == null) {
             synchronized (lock) {    // While we were waiting for the lock, another
-                r = instance;        // thread may have instantiated the object.
-                if (r == null) {
-                    r = new MCAFacebookAuthenticationManager();
-                    instance = r;
+                tempManagerInstance = instance;        // thread may have instantiated the object.
+                if (tempManagerInstance == null) {
+                    tempManagerInstance = new MCAFacebookAuthenticationManager();
+                    instance = tempManagerInstance;
                 }
             }
         }
-        return r;
+        return tempManagerInstance;
     }
 
     /**
