@@ -15,7 +15,6 @@ package com.ibm.mobileclientaccess.clientsdk.android.auth.facebook;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -24,6 +23,7 @@ import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
+import com.ibm.mobilefirstplatform.clientsdk.android.logger.api.Logger;
 
 import java.util.Arrays;
 import java.util.List;
@@ -34,8 +34,7 @@ import java.util.List;
 public class MCADefaultFacebookAuthenticationHandler implements
         MCAFacebookAuthentication
 {
-
-    private static String TAG = "FBOauth";
+    private Logger logger;
     private List<String> permissionNeeds = Arrays.asList("public_profile");
     private CallbackManager callbackmanager;
 
@@ -43,6 +42,7 @@ public class MCADefaultFacebookAuthenticationHandler implements
 
     public MCADefaultFacebookAuthenticationHandler(Context ctx) {
         this.ctx = ctx;
+        this.logger = Logger.getInstance(MCADefaultFacebookAuthenticationHandler.class.getSimpleName());
         callbackmanager = CallbackManager.Factory.create();
     }
 
@@ -59,12 +59,12 @@ public class MCADefaultFacebookAuthenticationHandler implements
         if (accessToken != null && !accessToken.isExpired())
         {
             String token = accessToken.getToken();
-            Log.d(TAG, "Token alerady available = " + token);
+            logger.debug("Token alerady available = " + token);
             MCAFacebookAuthenticationManager.getInstance().onFacebookAccessTokenReceived(token);
             return;
         }
 
-        Log.d(TAG, "not loggedin, continue");
+        logger.debug("not loggedin, continue");
 
         if (context instanceof Activity) {
             // Set permissions
@@ -80,13 +80,13 @@ public class MCADefaultFacebookAuthenticationHandler implements
 
                         @Override
                         public void onCancel() {
-                            Log.d(TAG, "On cancel");
+                            logger.debug("On cancel");
                             MCAFacebookAuthenticationManager.getInstance().onFacebookAuthenticationFailure(null);
                         }
 
                         @Override
                         public void onError(FacebookException error) {
-                            Log.d(TAG, error.toString());
+                            logger.debug(error.toString());
                             MCAFacebookAuthenticationManager.getInstance().onFacebookAuthenticationFailure(null);
                         }
                     });

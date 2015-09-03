@@ -14,10 +14,12 @@ package com.ibm.mobileclientaccess.fbauth;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.ibm.mobileclientaccess.clientsdk.android.auth.facebook.MCAFacebookAuthenticationManager;
@@ -29,19 +31,14 @@ import com.ibm.mobilefirstplatform.clientsdk.android.security.api.AuthorizationM
 import org.json.JSONObject;
 
 import java.net.MalformedURLException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class MainActivity extends Activity implements
-        View.OnClickListener,
-//        AuthenticationContext,
         ResponseListener
 {
 
-    private TextView info;
-//    private LoginButton loginButton;
-
-    private Button connectBtn;
-
-   // private static final String ACCESS_TOKEN_KEY = "accessToken";
+    private TextView infoTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,43 +49,34 @@ public class MainActivity extends Activity implements
 
         setContentView(R.layout.activity_main);
 
-        info = (TextView)findViewById(R.id.info);
-        connectBtn = (Button)findViewById(R.id.connect);
-        connectBtn.setOnClickListener(this);
-        findViewById(R.id.disconnect).setOnClickListener(this);
+        infoTextView = (TextView)findViewById(R.id.info);
+
+        /*
+            There may be issues with the hash key for the app, because it may not be correct when using from command line
+            https://developers.facebook.com/docs/android/getting-started#release-key-hash (troubleshoot section)
+            Add this code (and remove after getting the correct key (debug? release)) for this will print to log the correct hash code.
+         */
+        try {
+            PackageInfo info = getPackageManager().getPackageInfo(
+                    getPackageName(),
+                    PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+        } catch (NoSuchAlgorithmException e) {
+        }
 
         try {
+            //Register to the server with backendroute and GUID
             BMSClient.getInstance().initialize(this, "http://ilans-mbp.haifa.ibm.com:9080","ilan1234");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
 
-        AuthorizationManager.getInstance().obtainAuthorizationHeader(this, new ResponseListener() {
-            @Override
-            public void onSuccess(final Response response) {
-                final TextView tmpInfo = info;
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                    tmpInfo.setText("Connection Success!!!!");
-                    }
-                });
-                Log.e("Cirill", "onSuccess");
-            }
-
-            @Override
-            public void onFailure(Response response, Throwable t, JSONObject extendedInfo){
-                if (response != null){
-                    Log.e("onFailure Response", response.toString());
-                }
-
-                if (t != null){
-                    Log.e("onFailure Exception",t.toString());
-                }
-                //Log.e("Cirill", "onFailure");
-            }
-        });
-        // Register with default delegate
+        // Register the default delegate for Facebook
         MCAFacebookAuthenticationManager.getInstance().registerWithDefaultAuthenticationHandler(this);
     }
 
@@ -98,61 +86,30 @@ public class MainActivity extends Activity implements
     }
 
     @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.connect) {
-            AuthorizationManager.getInstance().obtainAuthorizationHeader(this,this);
-//            JSONObject obj = new JSONObject();
-//            try {
-//                obj.put("facebookAppId", "928371050557393");
-//                MCAFacebookAuthenticationManager.getInstance().onAuthenticationChallengeReceived(this, obj);
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
-        }
-        else if (v.getId() == R.id.disconnect) {
-            //TODO: do disconnect?
-        }
+    protected void onResume() {
+        super.onResume();
+        AuthorizationManager.getInstance().obtainAuthorizationHeader(this, this);
     }
-
-//    @Override
-//    public void submitAuthenticationChallengeAnswer(JSONObject answer) {
-//        try {
-//            info.setText(answer.getString(ACCESS_TOKEN_KEY));
-//        } catch (JSONException e) {
-//            info.setText("Error");
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    @Override
-//    public void submitAuthenticationChallengeSuccess() {
-//        info.setText("submitAuthenticationChallengeSuccess called");
-//    }
-//
-//    @Override
-//    public void submitAuthenticationChallengeFailure(JSONObject info) {
-//        this.info.setText("submitAuthenticationChallengeFailure called");
-//    }
 
     //ResponseListener
     @Override
     public void onSuccess(Response response) {
-        final TextView tmpInfo = this.info;
+        final TextView tmpInfo = this.infoTextView;
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                tmpInfo.setText("ResponseListener::onSuccess called");
+                tmpInfo.setText("Connected to Facebook - OK");
             }
         });
     }
 
     @Override
     public void onFailure(Response response, Throwable t, JSONObject extendedInfo) {
-        final TextView tmpInfo = this.info;
+        final TextView tmpInfo = this.infoTextView;
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                tmpInfo.setText("ResponseListener::onFailure called");
+                tmpInfo.setText("Connection to Facebook - Failed");
             }
         });
     }

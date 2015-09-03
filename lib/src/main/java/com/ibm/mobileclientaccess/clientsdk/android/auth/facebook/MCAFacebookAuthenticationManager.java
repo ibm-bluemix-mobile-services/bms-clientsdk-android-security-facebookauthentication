@@ -18,6 +18,7 @@ import android.content.Intent;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
 import com.ibm.mobilefirstplatform.clientsdk.android.core.api.BMSClient;
+import com.ibm.mobilefirstplatform.clientsdk.android.logger.api.Logger;
 import com.ibm.mobilefirstplatform.clientsdk.android.security.api.AuthenticationContext;
 import com.ibm.mobilefirstplatform.clientsdk.android.security.api.AuthenticationListener;
 
@@ -27,7 +28,7 @@ import org.json.JSONObject;
 public class MCAFacebookAuthenticationManager implements
         AuthenticationListener
 {
-    private static String TAG = "MCAFBOAuth";
+    private Logger logger;
 
     private MCAFacebookAuthentication facebookAuthenticationHandler;
 
@@ -35,7 +36,7 @@ public class MCAFacebookAuthenticationManager implements
     private static final String FACEBOOK_APP_ID_KEY = "facebookAppId";
     private static final String ACCESS_TOKEN_KEY = "accessToken";
 
-    private CallbackManager callbackmanager;
+    private CallbackManager fbCallbackmanager;
 
     //singelton
     private static final Object lock = new Object();
@@ -56,16 +57,23 @@ public class MCAFacebookAuthenticationManager implements
         return r;
     }
 
+    /**
+     * private constructor for singletons
+     */
     private MCAFacebookAuthenticationManager() {
-        callbackmanager = CallbackManager.Factory.create();
+        this.logger = Logger.getInstance(MCAFacebookAuthenticationManager.class.getSimpleName());
+        fbCallbackmanager = CallbackManager.Factory.create();
     }
 
+    /**
+     * register the default Handler for handling FB OAuth requests.
+     * @param ctx - needed context for Facebook SDK initialization
+     */
     public void registerWithDefaultAuthenticationHandler(Context ctx) {
         registerWithAuthenticationHandler(ctx, new MCADefaultFacebookAuthenticationHandler(ctx));
     }
 
     public void registerWithAuthenticationHandler(Context ctx, MCAFacebookAuthentication handler) {
-//        this.ctx = ctx;
         facebookAuthenticationHandler = handler;
 
         // Initialize SDK before setContentView(Layout ID)
@@ -85,7 +93,7 @@ public class MCAFacebookAuthenticationManager implements
             object.put(ACCESS_TOKEN_KEY, facebookAccessToken);
             authContext.submitAuthenticationChallengeAnswer(object);
         } catch (JSONException e) {
-            e.printStackTrace();
+            logger.error("Error in onFacebookAccessTokenReceived: " + e.getLocalizedMessage());
         }
     }
 
@@ -106,7 +114,7 @@ public class MCAFacebookAuthenticationManager implements
             setAuthenticationContext(authContext);
             facebookAuthenticationHandler.handleAuthentication(context, appId);
         } catch (JSONException e) {
-            e.printStackTrace();
+            logger.error("Error handling FB AuthenticationChallengeReceived: " + e.getLocalizedMessage());
         }
     }
 
