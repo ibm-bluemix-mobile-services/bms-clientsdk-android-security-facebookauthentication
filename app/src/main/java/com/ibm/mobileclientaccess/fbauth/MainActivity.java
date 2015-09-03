@@ -78,17 +78,13 @@ public class MainActivity extends Activity implements
 
         // Register the default delegate for Facebook
         MCAFacebookAuthenticationManager.getInstance().registerWithDefaultAuthenticationHandler(this);
+
+        AuthorizationManager.getInstance().obtainAuthorizationHeader(this, this);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         MCAFacebookAuthenticationManager.getInstance().onActivityResultCalled(requestCode, resultCode, data);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        AuthorizationManager.getInstance().obtainAuthorizationHeader(this, this);
     }
 
     //ResponseListener

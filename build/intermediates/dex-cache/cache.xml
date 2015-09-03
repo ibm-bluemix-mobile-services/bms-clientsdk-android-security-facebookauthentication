@@ -2,11 +2,11 @@
 <items version="2" >
 
     <item
-        jar="/Users/iklein/AndroidStudioProjects/bms-clientsdk-android-security-facebookauthentication/app/build/intermediates/exploded-aar/bms-clientsdk-android-security-facebookauthentication/bms_core/unspecified/jars/classes.jar"
+        jar="/Users/iklein/AndroidStudioProjects/bms-clientsdk-android-security-facebookauthentication/app/build/intermediates/exploded-aar/bms-clientsdk-android-security-facebookauthentication/lib/unspecified/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="7e5a7c102c91631f86d1aa9b0c2cd01d40bb1034">
-        <dex dex="/Users/iklein/AndroidStudioProjects/bms-clientsdk-android-security-facebookauthentication/app/build/intermediates/pre-dexed/debug/classes-baa6424c2f93c29231fdc76f17a4edbf054915f0.jar" />
+        sha1="cf8477900dce1bc29f1ab6ef588e399d48adf271">
+        <dex dex="/Users/iklein/AndroidStudioProjects/bms-clientsdk-android-security-facebookauthentication/app/build/intermediates/pre-dexed/debug/classes-52079e7f97c22a370c93814aa376988f0e066725.jar" />
     </item>
 
 </items>

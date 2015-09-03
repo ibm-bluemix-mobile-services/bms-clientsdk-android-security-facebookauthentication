@@ -21,6 +21,7 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.login.LoginBehavior;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.ibm.mobilefirstplatform.clientsdk.android.logger.api.Logger;
@@ -70,10 +71,13 @@ public class MCADefaultFacebookAuthenticationHandler implements
             // Set permissions
             LoginManager.getInstance().logInWithReadPermissions((Activity) context, permissionNeeds);
 
+            LoginManager.getInstance().setLoginBehavior(LoginBehavior.NATIVE_WITH_FALLBACK);
+
             LoginManager.getInstance().registerCallback(callbackmanager,
                     new FacebookCallback<LoginResult>() {
                         @Override
                         public void onSuccess(LoginResult loginResult) {
+                            logger.debug("LoginManager success loggedin");
                             String token = AccessToken.getCurrentAccessToken().getToken();
                             MCAFacebookAuthenticationManager.getInstance().onFacebookAccessTokenReceived(token);
                         }
@@ -95,10 +99,12 @@ public class MCADefaultFacebookAuthenticationHandler implements
         else{
             MCAFacebookAuthenticationManager.getInstance().onFacebookAuthenticationFailure(null);
         }
+
     }
 
     @Override
     public void onActivityResultCalled(int requestCode, int resultCode, Intent data) {
+        logger.debug("FB, onActivityResultCalled called");
         callbackmanager.onActivityResult(requestCode, resultCode, data);
     }
 }
