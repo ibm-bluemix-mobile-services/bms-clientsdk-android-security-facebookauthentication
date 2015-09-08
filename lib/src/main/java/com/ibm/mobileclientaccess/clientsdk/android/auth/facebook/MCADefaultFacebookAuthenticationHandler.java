@@ -42,8 +42,8 @@ public class MCADefaultFacebookAuthenticationHandler implements
     private List<String> permissionNeeds = Arrays.asList("public_profile");
     private CallbackManager callbackmanager;
 
-    public static final String CANCEL_ERROR_CODE = "403";
-    public static final String ERROR_ERROR_CODE = "500";
+    public static final String AUTH_CANCEL_CODE = "100";
+    public static final String AUTH_ERROR_CODE = "101";
 
     private Context ctx;
 
@@ -57,12 +57,11 @@ public class MCADefaultFacebookAuthenticationHandler implements
     public void handleAuthentication(Context context, String appId) {
         // Verify that the app Id defined in the .plist file is identical to the one requested by the IMF server.
         if(!(appId.equals(FacebookSdk.getApplicationId()))) {
-            JSONObject obj = new JSONObject();
+            JSONObject obj = null;
             try {
-                obj.put("errorCode", ERROR_ERROR_CODE);
-                obj.put("msg", "FBAuth - AppId is not the same");
+                obj = createFailureResponse(AUTH_ERROR_CODE, "FBAuth - AppId is not the same" );
             } catch (JSONException e) {
-                throw new RuntimeException();
+                logger.error("error creating JSON message");
             }
             MCAFacebookAuthenticationManager.getInstance().onFacebookAuthenticationFailure(obj);
             return;
@@ -97,13 +96,11 @@ public class MCADefaultFacebookAuthenticationHandler implements
 
                         @Override
                         public void onCancel() {
-                            logger.debug("On cancel");
-                            JSONObject obj = new JSONObject();
+                            JSONObject obj = null;
                             try {
-                                obj.put("errorCode", CANCEL_ERROR_CODE);
-                                obj.put("msg", "LoginManager::onCancel called");
+                                obj = createFailureResponse(AUTH_CANCEL_CODE, "LoginManager::onCancel called" );
                             } catch (JSONException e) {
-                                throw new RuntimeException();
+                                logger.error("error creating JSON message");
                             }
                             MCAFacebookAuthenticationManager.getInstance().onFacebookAuthenticationFailure(obj);
                         }
@@ -111,33 +108,38 @@ public class MCADefaultFacebookAuthenticationHandler implements
                         @Override
                         public void onError(FacebookException error) {
                             logger.debug(error.toString());
-                            JSONObject obj = new JSONObject();
+
+                            JSONObject obj = null;
                             try {
-                                obj.put("errorCode", ERROR_ERROR_CODE);
-                                obj.put("msg", error.toString());
+                                obj = createFailureResponse(AUTH_ERROR_CODE, error.toString() );
                             } catch (JSONException e) {
-                                throw new RuntimeException();
+                                logger.error("error creating JSON message");
                             }
                             MCAFacebookAuthenticationManager.getInstance().onFacebookAuthenticationFailure(obj);
                         }
                     });
         }
         else{
-            JSONObject obj = new JSONObject();
+            JSONObject obj = null;
             try {
-                obj.put("errorCode", ERROR_ERROR_CODE);
-                obj.put("msg", "The context provided is not ActivityContext, cannot proceed");
+                obj = createFailureResponse(AUTH_ERROR_CODE, "The context provided is not ActivityContext, cannot proceed" );
             } catch (JSONException e) {
-                throw new RuntimeException();
+                logger.error("error creating JSON message");
             }
             MCAFacebookAuthenticationManager.getInstance().onFacebookAuthenticationFailure(obj);
         }
-
     }
 
     @Override
     public void onActivityResultCalled(int requestCode, int resultCode, Intent data) {
         logger.debug("FB, onActivityResultCalled called");
         callbackmanager.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private JSONObject createFailureResponse(String code, String msg) throws JSONException{
+        JSONObject obj = null;
+        obj.put("errorCode", code);
+        obj.put("msg", msg);
+        return obj;
     }
 }
