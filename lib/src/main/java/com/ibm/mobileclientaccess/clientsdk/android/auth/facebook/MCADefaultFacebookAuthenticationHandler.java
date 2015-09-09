@@ -137,7 +137,7 @@ public class MCADefaultFacebookAuthenticationHandler implements
     }
 
     private JSONObject createFailureResponse(String code, String msg) throws JSONException{
-        JSONObject obj = null;
+        JSONObject obj = new JSONObject();
         obj.put("errorCode", code);
         obj.put("msg", msg);
         return obj;

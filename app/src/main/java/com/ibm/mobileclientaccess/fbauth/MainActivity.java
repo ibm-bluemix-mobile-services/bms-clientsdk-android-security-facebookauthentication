@@ -20,6 +20,7 @@ import android.content.pm.Signature;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import com.ibm.mobileclientaccess.clientsdk.android.auth.facebook.MCAFacebookAuthenticationManager;
@@ -34,9 +35,13 @@ import java.net.MalformedURLException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class MainActivity extends Activity implements
-        ResponseListener
+public class MainActivity extends Activity implements ResponseListener
 {
+
+    //private final String
+
+    private final String backendRoute = "https://AsafAppUnAuth.stage1.mybluemix.net?subzone=dev";
+    private final String backendGUID = "a23e3fed-b3e7-4bc6-8662-80fa1fac446f";
 
     private TextView infoTextView;
 
@@ -66,41 +71,52 @@ public class MainActivity extends Activity implements
 
         try {
             //Register to the server with backendroute and GUID
-            BMSClient.getInstance().initialize(this, "http://ilans-mbp.haifa.ibm.com:9080","ilan1234");
+            BMSClient.getInstance().initialize(this, backendRoute,backendGUID);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
 
         // Register the default delegate for Facebook
         MCAFacebookAuthenticationManager.getInstance().registerWithDefaultAuthenticationHandler(this);
-
-        AuthorizationManager.getInstance().obtainAuthorizationHeader(this, this);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        setStatus("Checking facebook login data...");
         MCAFacebookAuthenticationManager.getInstance().onActivityResultCalled(requestCode, resultCode, data);
     }
 
     //ResponseListener
     @Override
     public void onSuccess(Response response) {
-        final TextView tmpInfo = this.infoTextView;
+        setStatus("Connected to Facebook - OK");
+
+        final TextView viewById = (TextView) findViewById(R.id.user);
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                tmpInfo.setText("Connected to Facebook - OK");
+                viewById.setText("User: " + AuthorizationManager.getInstance().getUserIdentity().getDisplayName());
             }
         });
     }
 
     @Override
     public void onFailure(Response response, Throwable t, JSONObject extendedInfo) {
+        setStatus("Connection to Facebook - Failed");
+    }
+
+
+    public void onLogin(View view){
+        setStatus("Obtain Authorization Header...");
+        AuthorizationManager.getInstance().obtainAuthorizationHeader(this, this);
+    }
+
+    private void setStatus(final String text){
         final TextView tmpInfo = this.infoTextView;
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                tmpInfo.setText("Connection to Facebook - Failed");
+                tmpInfo.setText(text);
             }
         });
     }
