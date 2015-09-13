@@ -23,7 +23,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import com.ibm.mobileclientaccess.clientsdk.android.auth.facebook.MCAFacebookAuthenticationManager;
+import com.ibm.mobilefirstplatform.clientsdk.android.security.facebookauthentication.FacebookAuthenticationManager;
 import com.ibm.mobilefirstplatform.clientsdk.android.core.api.BMSClient;
 import com.ibm.mobilefirstplatform.clientsdk.android.core.api.Response;
 import com.ibm.mobilefirstplatform.clientsdk.android.core.api.ResponseListener;
@@ -37,11 +37,10 @@ import java.security.NoSuchAlgorithmException;
 
 public class MainActivity extends Activity implements ResponseListener
 {
-
     //private final String
 
-    private final String backendRoute = "https://AsafAppUnAuth.stage1.mybluemix.net?subzone=dev";
-    private final String backendGUID = "a23e3fed-b3e7-4bc6-8662-80fa1fac446f";
+    private final String backendRoute = "https://FBOauthDemo.stage1.mybluemix.net?subzone=dev";
+    private final String backendGUID = "4e83fe1c-92ef-4a74-81ec-6970091005bb";
 
     private TextView infoTextView;
 
@@ -77,13 +76,13 @@ public class MainActivity extends Activity implements ResponseListener
         }
 
         // Register the default delegate for Facebook
-        MCAFacebookAuthenticationManager.getInstance().registerWithDefaultAuthenticationHandler(this);
+        FacebookAuthenticationManager.getInstance().registerDefaultAuthenticationListener(this);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         setStatus("Checking facebook login data...");
-        MCAFacebookAuthenticationManager.getInstance().onActivityResultCalled(requestCode, resultCode, data);
+        FacebookAuthenticationManager.getInstance().onActivityResultCalled(requestCode, resultCode, data);
     }
 
     //ResponseListener

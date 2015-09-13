@@ -10,7 +10,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-package com.ibm.mobileclientaccess.clientsdk.android.auth.facebook;
+package com.ibm.mobilefirstplatform.clientsdk.android.security.facebookauthentication;
 
 import android.app.Activity;
 import android.content.Context;
@@ -35,8 +35,8 @@ import java.util.List;
 /**
  * Created by iklein on 8/5/15.
  */
-public class MCADefaultFacebookAuthenticationHandler implements
-        MCAFacebookAuthentication
+public class DefaultFacebookAuthenticationListener implements
+        FacebookAuthenticationListener
 {
     private Logger logger;
     private List<String> permissionNeeds = Arrays.asList("public_profile");
@@ -45,11 +45,8 @@ public class MCADefaultFacebookAuthenticationHandler implements
     public static final String AUTH_CANCEL_CODE = "100";
     public static final String AUTH_ERROR_CODE = "101";
 
-    private Context ctx;
-
-    public MCADefaultFacebookAuthenticationHandler(Context ctx) {
-        this.ctx = ctx;
-        this.logger = Logger.getInstance(MCADefaultFacebookAuthenticationHandler.class.getSimpleName());
+    public DefaultFacebookAuthenticationListener() {
+        this.logger = Logger.getInstance(DefaultFacebookAuthenticationListener.class.getSimpleName());
         callbackmanager = CallbackManager.Factory.create();
     }
 
@@ -63,7 +60,7 @@ public class MCADefaultFacebookAuthenticationHandler implements
             } catch (JSONException e) {
                 logger.error("error creating JSON message");
             }
-            MCAFacebookAuthenticationManager.getInstance().onFacebookAuthenticationFailure(obj);
+            FacebookAuthenticationManager.getInstance().onFacebookAuthenticationFailure(obj);
             return;
         }
 
@@ -73,7 +70,7 @@ public class MCADefaultFacebookAuthenticationHandler implements
         {
             String token = accessToken.getToken();
             logger.debug("Token alerady available = " + token);
-            MCAFacebookAuthenticationManager.getInstance().onFacebookAccessTokenReceived(token);
+            FacebookAuthenticationManager.getInstance().onFacebookAccessTokenReceived(token);
             return;
         }
 
@@ -91,7 +88,7 @@ public class MCADefaultFacebookAuthenticationHandler implements
                         public void onSuccess(LoginResult loginResult) {
                             logger.debug("LoginManager success loggedin");
                             String token = AccessToken.getCurrentAccessToken().getToken();
-                            MCAFacebookAuthenticationManager.getInstance().onFacebookAccessTokenReceived(token);
+                            FacebookAuthenticationManager.getInstance().onFacebookAccessTokenReceived(token);
                         }
 
                         @Override
@@ -102,7 +99,7 @@ public class MCADefaultFacebookAuthenticationHandler implements
                             } catch (JSONException e) {
                                 logger.error("error creating JSON message");
                             }
-                            MCAFacebookAuthenticationManager.getInstance().onFacebookAuthenticationFailure(obj);
+                            FacebookAuthenticationManager.getInstance().onFacebookAuthenticationFailure(obj);
                         }
 
                         @Override
@@ -115,7 +112,7 @@ public class MCADefaultFacebookAuthenticationHandler implements
                             } catch (JSONException e) {
                                 logger.error("error creating JSON message");
                             }
-                            MCAFacebookAuthenticationManager.getInstance().onFacebookAuthenticationFailure(obj);
+                            FacebookAuthenticationManager.getInstance().onFacebookAuthenticationFailure(obj);
                         }
                     });
         }
@@ -126,7 +123,7 @@ public class MCADefaultFacebookAuthenticationHandler implements
             } catch (JSONException e) {
                 logger.error("error creating JSON message");
             }
-            MCAFacebookAuthenticationManager.getInstance().onFacebookAuthenticationFailure(obj);
+            FacebookAuthenticationManager.getInstance().onFacebookAuthenticationFailure(obj);
         }
     }
 

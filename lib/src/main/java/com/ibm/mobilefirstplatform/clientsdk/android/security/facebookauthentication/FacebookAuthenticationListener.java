@@ -10,7 +10,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-package com.ibm.mobileclientaccess.clientsdk.android.auth.facebook;
+package com.ibm.mobilefirstplatform.clientsdk.android.security.facebookauthentication;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,7 +18,7 @@ import android.content.Intent;
 /**
  * Created by iklein on 8/5/15.
  */
-public interface MCAFacebookAuthentication {
+public interface FacebookAuthenticationListener {
 
     /**
      * Signs-in to Facebook as identity provider and sends the access token back to the authentication handler.
