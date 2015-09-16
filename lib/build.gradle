@@ -20,11 +20,19 @@ android {
 
 repositories {
     mavenCentral()
+//    maven {
+//        url 'http://visustar.francelab.fr.ibm.com:8081/nexus/content/repositories/mobile-all' //Internal Nexus
+//    }
+    flatDir{
+        dirs 'libs'
+    }
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile (name:'bms-clientsdk-android-core-0.1-SNAPSHOT', ext:'aar')
     //    compile 'com.android.support:appcompat-v7:22.2.1'
     compile 'com.facebook.android:facebook-android-sdk:4.5.0'
-    compile project(':bms_core')
+//    compile 'com.ibm.mobilefirstplatform.bms.clientsdk.android:bms-clientsdk-android-core:0.1-SNAPSHOT'
+//    compile project(':bms_core')
 }

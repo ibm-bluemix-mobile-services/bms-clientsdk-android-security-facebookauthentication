@@ -5,7 +5,7 @@
         jar="/Users/iklein/AndroidStudioProjects/bms-clientsdk-android-security-facebookauthentication/app/build/intermediates/exploded-aar/bms-clientsdk-android-security-facebookauthentication/bms_core/unspecified/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="ebfe85294bb60e9964f7b09071087759a6849ad8">
+        sha1="ba1a8820bd96addcda5ede1883f341ecff72d4f1">
         <dex dex="/Users/iklein/AndroidStudioProjects/bms-clientsdk-android-security-facebookauthentication/app/build/intermediates/pre-dexed/debug/classes-baa6424c2f93c29231fdc76f17a4edbf054915f0.jar" />
     </item>
     <item
