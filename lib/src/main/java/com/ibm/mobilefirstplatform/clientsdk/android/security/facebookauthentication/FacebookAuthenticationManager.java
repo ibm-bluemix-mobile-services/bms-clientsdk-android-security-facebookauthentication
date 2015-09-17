@@ -119,12 +119,12 @@ public class FacebookAuthenticationManager implements
     }
 
     @Override
-    public void onAuthenticationSuccess(JSONObject info) {
+    public void onAuthenticationSuccess(Context ctx, JSONObject info) {
         authContext = null;
     }
 
     @Override
-    public void onAuthenticationFailure(JSONObject info) {
+    public void onAuthenticationFailure(Context ctx, JSONObject info) {
         authContext = null;
     }
 }
