@@ -39,8 +39,8 @@ public class MainActivity extends Activity implements ResponseListener
 {
     //private final String
 
-    private final String backendRoute = "https://FBOauthDemo.stage1.mybluemix.net?subzone=dev";
-    private final String backendGUID = "4e83fe1c-92ef-4a74-81ec-6970091005bb";
+    private final String backendRoute = "https://fboauthdemo.stage1.mybluemix.net/?subzone=dev";
+    private final String backendGUID = "b8db8771-4352-48b5-a95a-6d26459da7ef";
 
     private TextView infoTextView;
 
