@@ -33,7 +33,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * This class is the default Facebook authenticator code
+ * This class is the default Facebook OAuth authenticator code
  */
 public class DefaultFacebookAuthenticationListener implements
         FacebookAuthenticationListener
@@ -43,12 +43,12 @@ public class DefaultFacebookAuthenticationListener implements
     private CallbackManager callbackmanager;
 
     /**
-     * Default return cancel code when cancel is pressed during fb authentication (info)
+     * Default return code when cancel is pressed during fb authentication (info)
      */
     public static final String AUTH_CANCEL_CODE = "100";
 
     /**
-     * Default return cancel code when error occures (info)
+     * Default return code when error occures (info)
      */
     public static final String AUTH_ERROR_CODE = "101";
 

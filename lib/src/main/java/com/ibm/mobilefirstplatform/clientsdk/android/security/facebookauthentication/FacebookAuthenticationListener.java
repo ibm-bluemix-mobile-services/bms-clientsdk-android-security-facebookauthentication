@@ -16,7 +16,7 @@ import android.content.Context;
 import android.content.Intent;
 
 /**
- * Facebook listener, defines how to handle the authentication for Facebook
+ * Facebook OAuth listener, defines how to handle the authentication for Facebook
  */
 public interface FacebookAuthenticationListener {
 
@@ -29,7 +29,7 @@ public interface FacebookAuthenticationListener {
     void handleAuthentication(Context context, String appId);
 
     /**
-     * When the Facebook activity ends, it sends a result code, and that result needs to be transferred to the facebook code,
+     * When the Facebook activity ends, it sends a result code to the activity, and that result needs to be transferred to the facebook code,
      * @param requestCode the intent request code
      * @param resultCode the result
      * @param data the data (if any)

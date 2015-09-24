@@ -26,7 +26,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * Class implementation for managing the facebook listener.
+ * Class implementation for managing the Facebook OAuth listener.
  * This class registers to AuthenticationListener in order to handle authentication requests
  */
 public class FacebookAuthenticationManager implements
@@ -66,7 +66,7 @@ public class FacebookAuthenticationManager implements
     }
 
     /**
-     * private constructor for singletons
+     * private constructor for singleton
      */
     private FacebookAuthenticationManager() {
         this.logger = Logger.getInstance(FacebookAuthenticationManager.class.getSimpleName());
@@ -74,7 +74,7 @@ public class FacebookAuthenticationManager implements
     }
 
     /**
-     * Register the default Handler for handling FB OAuth requests.
+     * Register the default Handler for handling OAuth requests.
      * @param ctx - needed context for Facebook SDK initialization
      */
     public void registerDefaultAuthenticationListener(Context ctx) {
@@ -84,10 +84,10 @@ public class FacebookAuthenticationManager implements
     /**
      * Register an Authentication listener
      * @param ctx context for facebook api code
-     * @param handler the handler to register
+     * @param listener the listener to register
      */
-    public void registerAuthenticationListener(Context ctx, FacebookAuthenticationListener handler) {
-        facebookAuthenticationListener = handler;
+    public void registerAuthenticationListener(Context ctx, FacebookAuthenticationListener listener) {
+        facebookAuthenticationListener = listener;
 
         // Initialize SDK before setContentView(Layout ID)
         FacebookSdk.sdkInitialize(ctx);
@@ -107,7 +107,8 @@ public class FacebookAuthenticationManager implements
     }
 
     /**
-     * Called when the authentication process has succeeded for Facebook, now we send the token as a response to BM authentication challenge.
+     * Called when the authentication process has succeeded for Facebook, now we send the token as a response to BM
+     * authentication challenge.
      * @param facebookAccessToken the token response
      */
     public void onFacebookAccessTokenReceived(String facebookAccessToken) {
