@@ -66,7 +66,7 @@ public class DefaultFacebookAuthenticationListener implements
         if(!(appId.equals(FacebookSdk.getApplicationId()))) {
             JSONObject obj = null;
             try {
-                obj = createFailureResponse(AUTH_ERROR_CODE, "Facebook OAuth - AppId is not the same" );
+                obj = createFailureResponse(AUTH_ERROR_CODE, "Facebook OAuth - AppId is not equal to " +  appId);
             } catch (JSONException e) {
                 logger.error("error creating JSON message");
             }
