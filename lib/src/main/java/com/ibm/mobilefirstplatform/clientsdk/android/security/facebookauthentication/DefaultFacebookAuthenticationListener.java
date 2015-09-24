@@ -33,6 +33,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
+ * This class is the default
  * Created by iklein on 8/5/15.
  */
 public class DefaultFacebookAuthenticationListener implements
@@ -42,9 +43,19 @@ public class DefaultFacebookAuthenticationListener implements
     private List<String> permissionNeeds = Arrays.asList("public_profile");
     private CallbackManager callbackmanager;
 
+    /**
+     * Default return cancel code when cancel is pressed during fb authentication (info)
+     */
     public static final String AUTH_CANCEL_CODE = "100";
+
+    /**
+     * Default return cancel code when error occures (info)
+     */
     public static final String AUTH_ERROR_CODE = "101";
 
+    /**
+     * construct a Default Facebook Authentication Listener
+     */
     public DefaultFacebookAuthenticationListener() {
         this.logger = Logger.getInstance(DefaultFacebookAuthenticationListener.class.getSimpleName());
         callbackmanager = CallbackManager.Factory.create();

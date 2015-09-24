@@ -16,8 +16,7 @@ allprojects {
     repositories {
         jcenter()
         maven {
-            url 'http://visustar.francelab.fr.ibm.com:8081/nexus/content/repositories/mobile-all'
-            //Internal Nexus
+            url 'https://oss.sonatype.org/content/repositories/snapshots/'
         }
     }
 }

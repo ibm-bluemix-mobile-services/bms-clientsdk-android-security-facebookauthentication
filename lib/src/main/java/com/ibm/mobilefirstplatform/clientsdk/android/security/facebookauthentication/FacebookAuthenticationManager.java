@@ -25,6 +25,10 @@ import com.ibm.mobilefirstplatform.clientsdk.android.security.api.Authentication
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * Class implementation for managing the facebook listner.
+ * This class registers to AuthenticationListener in order to handle authentication requests
+ */
 public class FacebookAuthenticationManager implements
         AuthenticationListener
 {
@@ -43,6 +47,10 @@ public class FacebookAuthenticationManager implements
     private static volatile FacebookAuthenticationManager instance;
     private AuthenticationContext authContext;
 
+    /**
+     * Manager singleton
+     * @return
+     */
     public static FacebookAuthenticationManager getInstance() {
         FacebookAuthenticationManager tempManagerInstance = instance;
         if (tempManagerInstance == null) {
@@ -66,13 +74,18 @@ public class FacebookAuthenticationManager implements
     }
 
     /**
-     * register the default Handler for handling FB OAuth requests.
+     * Register the default Handler for handling FB OAuth requests.
      * @param ctx - needed context for Facebook SDK initialization
      */
     public void registerDefaultAuthenticationListener(Context ctx) {
         registerAuthenticationListener(ctx, new DefaultFacebookAuthenticationListener());
     }
 
+    /**
+     *
+     * @param ctx
+     * @param handler
+     */
     public void registerAuthenticationListener(Context ctx, FacebookAuthenticationListener handler) {
         facebookAuthenticationListener = handler;
 
