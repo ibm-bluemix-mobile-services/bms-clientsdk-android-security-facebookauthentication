@@ -26,7 +26,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * Class implementation for managing the facebook listner.
+ * Class implementation for managing the facebook listener.
  * This class registers to AuthenticationListener in order to handle authentication requests
  */
 public class FacebookAuthenticationManager implements
@@ -48,8 +48,8 @@ public class FacebookAuthenticationManager implements
     private AuthenticationContext authContext;
 
     /**
-     * Manager singleton
-     * @return
+     * Manager singleton - used for registering and handling authentication
+     * @return the FacebookAuthenticationManager singelton
      */
     public static FacebookAuthenticationManager getInstance() {
         FacebookAuthenticationManager tempManagerInstance = instance;
@@ -82,9 +82,9 @@ public class FacebookAuthenticationManager implements
     }
 
     /**
-     *
-     * @param ctx
-     * @param handler
+     * Register an Authentication listener
+     * @param ctx context for facebook api code
+     * @param handler the handler to register
      */
     public void registerAuthenticationListener(Context ctx, FacebookAuthenticationListener handler) {
         facebookAuthenticationListener = handler;
@@ -96,10 +96,20 @@ public class FacebookAuthenticationManager implements
         BMSClient.getInstance().registerAuthenticationListener(FACEBOOK_REALM, this);
     }
 
+    /**
+     * When the Facebook activity ends, it sends a result code, and that result needs to be transferred to the facebook code,
+     * @param requestCode the intent request code
+     * @param resultCode the result
+     * @param data the data (if any)
+     */
     public void onActivityResultCalled(int requestCode, int resultCode, Intent data) {
         facebookAuthenticationListener.onActivityResultCalled(requestCode, resultCode, data);
     }
 
+    /**
+     * Called when the authentication process has succeeded for Facebook, now we send the token as a response to BM authentication challenge.
+     * @param facebookAccessToken the token response
+     */
     public void onFacebookAccessTokenReceived(String facebookAccessToken) {
         JSONObject object = new JSONObject();
         try {
@@ -110,15 +120,18 @@ public class FacebookAuthenticationManager implements
         }
     }
 
+    /**
+     * Called when the authentication process has failed for Facebook.
+     * @param userInfo error data
+     */
     public void onFacebookAuthenticationFailure(JSONObject userInfo) {
         authContext.submitAuthenticationFailure(userInfo);
         authContext = null;
     }
 
-    void setAuthenticationContext(AuthenticationContext authContext) {
+    private void setAuthenticationContext(AuthenticationContext authContext) {
         this.authContext = authContext;
     }
-
 
     @Override
     public void onAuthenticationChallengeReceived(AuthenticationContext authContext, JSONObject challenge, Context context) {

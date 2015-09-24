@@ -33,8 +33,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * This class is the default
- * Created by iklein on 8/5/15.
+ * This class is the default Facebook authenticator code
  */
 public class DefaultFacebookAuthenticationListener implements
         FacebookAuthenticationListener
@@ -54,7 +53,7 @@ public class DefaultFacebookAuthenticationListener implements
     public static final String AUTH_ERROR_CODE = "101";
 
     /**
-     * construct a Default Facebook Authentication Listener
+     * Construct a Default Facebook Authentication Listener
      */
     public DefaultFacebookAuthenticationListener() {
         this.logger = Logger.getInstance(DefaultFacebookAuthenticationListener.class.getSimpleName());
