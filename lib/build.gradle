@@ -46,7 +46,7 @@ task generateJavadoc(type: Javadoc) {
 
     options.encoding 'UTF-8'
 
-    setTitle 'Bluemix Mobile Services Core Android API'
+    setTitle 'Bluemix Mobile Services Facebook OAuth Android API'
 }
 
 task androidJavadocsJar(type: Jar, dependsOn: generateJavadoc) {
@@ -92,8 +92,6 @@ uploadArchives {
             snapshotRepository(url: getSnapshotRepositoryUrl()) {
                 authentication(userName: getRepositoryUsername(), password: getRepositoryPassword())
             }
-
-            //    com.ibm.mobilefirstplatform.bms.clientsdk.android:bms-clientsdk-android-security-facebookauthentication
 
             pom.groupId='com.ibm.mobilefirstplatform.clientsdk.android'
             pom.artifactId='facebookauthentication'
