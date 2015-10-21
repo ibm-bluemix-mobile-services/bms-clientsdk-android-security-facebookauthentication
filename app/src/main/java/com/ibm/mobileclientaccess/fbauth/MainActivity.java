@@ -39,8 +39,8 @@ public class MainActivity extends Activity implements ResponseListener
 {
     //private final String
 
-    private final String backendRoute = "https://fboauthdemo.stage1.mybluemix.net/?subzone=dev";
-    private final String backendGUID = "b8db8771-4352-48b5-a95a-6d26459da7ef";
+    private final String backendRoute = "https://ilan2-fb.stage1.mybluemix.net/?subzone=dev";
+    private final String backendGUID = "c3b198bd-6d3d-4064-9aea-c15cd2c280e1";
 
     private TextView infoTextView;
 
@@ -76,7 +76,7 @@ public class MainActivity extends Activity implements ResponseListener
         }
 
         // Register the default delegate for Facebook
-        FacebookAuthenticationManager.getInstance().registerDefaultAuthenticationListener(this);
+        FacebookAuthenticationManager.getInstance().register(this);
     }
 
     @Override

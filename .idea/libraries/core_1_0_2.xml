@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="core-1.0.2">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.ibm.mobilefirstplatform.clientsdk.android/core/1.0.2/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.ibm.mobilefirstplatform.clientsdk.android/core/1.0.2/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.ibm.mobilefirstplatform.clientsdk.android/core/1.0.2/54b3ebbce45d76a617e834aa7dd8b9d6209ee8c3/core-1.0.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
