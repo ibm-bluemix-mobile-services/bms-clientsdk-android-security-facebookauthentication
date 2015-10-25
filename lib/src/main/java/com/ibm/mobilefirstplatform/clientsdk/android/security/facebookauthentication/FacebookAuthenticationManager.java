@@ -108,6 +108,20 @@ public class FacebookAuthenticationManager implements
     }
 
     /**
+     * When the Facebook activity ends, it sends a result code, and that result needs to be transferred to the facebook code,
+     *
+     * @param requestCode the intent request code
+     * @param resultCode  the result
+     * @param data        the data (if any)
+     */
+    public void onActivityResultCalled(int requestCode, int resultCode, Intent data) {
+        logger.debug("FB, onActivityResultCalled called");
+        callbackmanager.onActivityResult(requestCode, resultCode, data);
+    }
+
+    //////////////////////////////// Public API /////////////////////////////////////////
+
+    /**
      * Signs-in to Facebook as identity provider and sends the access token back to the authentication handler.
      *
      * @param appId   The Facebook app id.
@@ -186,19 +200,6 @@ public class FacebookAuthenticationManager implements
             FacebookAuthenticationManager.getInstance().onFacebookAuthenticationFailure(obj);
         }
     }
-
-    /**
-     * When the Facebook activity ends, it sends a result code, and that result needs to be transferred to the facebook code,
-     *
-     * @param requestCode the intent request code
-     * @param resultCode  the result
-     * @param data        the data (if any)
-     */
-    public void onActivityResultCalled(int requestCode, int resultCode, Intent data) {
-        logger.debug("FB, onActivityResultCalled called");
-        callbackmanager.onActivityResult(requestCode, resultCode, data);
-    }
-    //////////////////////////////// Public API /////////////////////////////////////////
 
     private JSONObject createFailureResponse(String code, String msg) throws JSONException {
         JSONObject obj = new JSONObject();
