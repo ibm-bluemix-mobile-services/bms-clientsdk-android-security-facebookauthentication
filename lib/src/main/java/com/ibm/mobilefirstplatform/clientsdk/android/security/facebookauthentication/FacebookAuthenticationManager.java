@@ -40,8 +40,7 @@ import java.util.List;
  * This class registers to AuthenticationListener in order to handle authentication requests
  */
 public class FacebookAuthenticationManager implements
-        AuthenticationListener
-{
+        AuthenticationListener {
     private Logger logger;
 
     private static final String FACEBOOK_REALM = "wl_facebookRealm";
@@ -68,6 +67,7 @@ public class FacebookAuthenticationManager implements
 
     /**
      * Manager singleton - used for registering and handling authentication
+     *
      * @return the FacebookAuthenticationManager singelton
      */
     public static FacebookAuthenticationManager getInstance() {
@@ -93,6 +93,7 @@ public class FacebookAuthenticationManager implements
     }
 
     //////////////////////////////// Public API /////////////////////////////////////////
+
     /**
      * Supply context for initialization of Facebook sdk
      *
@@ -112,12 +113,12 @@ public class FacebookAuthenticationManager implements
      * @param appId   The Facebook app id.
      * @param context context to pass for request resources
      */
-    public void handleAuthentication(Context context, String appId) {
+    private void handleAuthentication(Context context, String appId) {
         // Verify that the app Id defined in the .plist file is identical to the one requested by the IMF server.
-        if(!(appId.equals(FacebookSdk.getApplicationId()))) {
+        if (!(appId.equals(FacebookSdk.getApplicationId()))) {
             JSONObject obj = null;
             try {
-                obj = createFailureResponse(AUTH_ERROR_CODE, "Facebook OAuth - AppId is not equal to " +  appId);
+                obj = createFailureResponse(AUTH_ERROR_CODE, "Facebook OAuth - AppId is not equal to " + appId);
             } catch (JSONException e) {
                 logger.error("error creating JSON message");
             }
@@ -127,8 +128,7 @@ public class FacebookAuthenticationManager implements
 
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
         // Use the Facebook SDK to login.
-        if (accessToken != null && !accessToken.isExpired())
-        {
+        if (accessToken != null && !accessToken.isExpired()) {
             String token = accessToken.getToken();
             logger.debug("Token alerady available = " + token);
             FacebookAuthenticationManager.getInstance().onFacebookAccessTokenReceived(token);
@@ -156,7 +156,7 @@ public class FacebookAuthenticationManager implements
                         public void onCancel() {
                             JSONObject obj = null;
                             try {
-                                obj = createFailureResponse(AUTH_CANCEL_CODE, "LoginManager::onCancel called" );
+                                obj = createFailureResponse(AUTH_CANCEL_CODE, "LoginManager::onCancel called");
                             } catch (JSONException e) {
                                 logger.error("error creating JSON message");
                             }
@@ -169,18 +169,17 @@ public class FacebookAuthenticationManager implements
 
                             JSONObject obj = null;
                             try {
-                                obj = createFailureResponse(AUTH_ERROR_CODE, error.toString() );
+                                obj = createFailureResponse(AUTH_ERROR_CODE, error.toString());
                             } catch (JSONException e) {
                                 logger.error("error creating JSON message");
                             }
                             FacebookAuthenticationManager.getInstance().onFacebookAuthenticationFailure(obj);
                         }
                     });
-        }
-        else{
+        } else {
             JSONObject obj = null;
             try {
-                obj = createFailureResponse(AUTH_ERROR_CODE, "The context provided is not ActivityContext, cannot proceed" );
+                obj = createFailureResponse(AUTH_ERROR_CODE, "The context provided is not ActivityContext, cannot proceed");
             } catch (JSONException e) {
                 logger.error("error creating JSON message");
             }
@@ -190,9 +189,10 @@ public class FacebookAuthenticationManager implements
 
     /**
      * When the Facebook activity ends, it sends a result code, and that result needs to be transferred to the facebook code,
+     *
      * @param requestCode the intent request code
-     * @param resultCode the result
-     * @param data the data (if any)
+     * @param resultCode  the result
+     * @param data        the data (if any)
      */
     public void onActivityResultCalled(int requestCode, int resultCode, Intent data) {
         logger.debug("FB, onActivityResultCalled called");
@@ -200,7 +200,7 @@ public class FacebookAuthenticationManager implements
     }
     //////////////////////////////// Public API /////////////////////////////////////////
 
-    private JSONObject createFailureResponse(String code, String msg) throws JSONException{
+    private JSONObject createFailureResponse(String code, String msg) throws JSONException {
         JSONObject obj = new JSONObject();
         obj.put("errorCode", code);
         obj.put("msg", msg);
@@ -210,6 +210,7 @@ public class FacebookAuthenticationManager implements
     /**
      * Called when the authentication process has succeeded for Facebook, now we send the token as a response to BM
      * authentication challenge.
+     *
      * @param facebookAccessToken the token response
      */
     public void onFacebookAccessTokenReceived(String facebookAccessToken) {
@@ -224,6 +225,7 @@ public class FacebookAuthenticationManager implements
 
     /**
      * Called when the authentication process has failed for Facebook.
+     *
      * @param userInfo error data
      */
     public void onFacebookAuthenticationFailure(JSONObject userInfo) {
