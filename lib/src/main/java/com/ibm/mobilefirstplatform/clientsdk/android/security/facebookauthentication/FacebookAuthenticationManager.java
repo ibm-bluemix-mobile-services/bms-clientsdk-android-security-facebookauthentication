@@ -53,12 +53,12 @@ public class FacebookAuthenticationManager implements
     /**
      * Default return code when cancel is pressed during fb authentication (info)
      */
-    public static final String AUTH_CANCEL_CODE = "100";
+    private static final String AUTH_CANCEL_CODE = "100";
 
     /**
      * Default return code when error occures (info)
      */
-    public static final String AUTH_ERROR_CODE = "101";
+    private static final String AUTH_ERROR_CODE = "101";
 
     //singelton
     private static final Object lock = new Object();
@@ -214,7 +214,7 @@ public class FacebookAuthenticationManager implements
      *
      * @param facebookAccessToken the token response
      */
-    public void onFacebookAccessTokenReceived(String facebookAccessToken) {
+    private void onFacebookAccessTokenReceived(String facebookAccessToken) {
         JSONObject object = new JSONObject();
         try {
             object.put(ACCESS_TOKEN_KEY, facebookAccessToken);
@@ -229,7 +229,7 @@ public class FacebookAuthenticationManager implements
      *
      * @param userInfo error data
      */
-    public void onFacebookAuthenticationFailure(JSONObject userInfo) {
+    private void onFacebookAuthenticationFailure(JSONObject userInfo) {
         authContext.submitAuthenticationFailure(userInfo);
         authContext = null;
     }
