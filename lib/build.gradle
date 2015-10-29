@@ -8,8 +8,8 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "2.0"
     }
     buildTypes {
         release {
@@ -95,7 +95,7 @@ uploadArchives {
 
             pom.groupId='com.ibm.mobilefirstplatform.clientsdk.android'
             pom.artifactId='facebookauthentication'
-            pom.version = '1.0.0-SNAPSHOT'
+            pom.version = '2.0.0-SNAPSHOT'
 
             pom.project {
                 name 'IBM Bluemix Mobile Services - Client SDK Android Facebook Authentication'
