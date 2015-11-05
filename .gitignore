@@ -4,3 +4,5 @@
 /lib/build
 /app/build
 /build
+/.gradle
+/.idea
