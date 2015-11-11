@@ -88,7 +88,7 @@ public class FacebookAuthenticationManager implements
      * private constructor for singleton
      */
     private FacebookAuthenticationManager() {
-        this.logger = Logger.getInstance(FacebookAuthenticationManager.class.getSimpleName());
+        this.logger = Logger.getInstance(Logger.INTERNAL_PREFIX + FacebookAuthenticationManager.class.getSimpleName());
         callbackmanager = CallbackManager.Factory.create();
     }
 

@@ -23,11 +23,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import com.ibm.mobilefirstplatform.clientsdk.android.security.facebookauthentication.FacebookAuthenticationManager;
 import com.ibm.mobilefirstplatform.clientsdk.android.core.api.BMSClient;
 import com.ibm.mobilefirstplatform.clientsdk.android.core.api.Response;
 import com.ibm.mobilefirstplatform.clientsdk.android.core.api.ResponseListener;
+import com.ibm.mobilefirstplatform.clientsdk.android.logger.api.Logger;
 import com.ibm.mobilefirstplatform.clientsdk.android.security.api.AuthorizationManager;
+import com.ibm.mobilefirstplatform.clientsdk.android.security.facebookauthentication.FacebookAuthenticationManager;
 
 import org.json.JSONObject;
 
@@ -39,8 +40,8 @@ public class MainActivity extends Activity implements ResponseListener
 {
     //private final String
 
-    private final String backendRoute = "https://ilan2-fb.stage1.mybluemix.net/?subzone=dev";
-    private final String backendGUID = "c3b198bd-6d3d-4064-9aea-c15cd2c280e1";
+    private final String backendRoute = "http://ilan4-fb-ng.mybluemix.net";
+    private final String backendGUID = "cda8270a-2606-450d-a740-17f67c3f5502";
 
     private TextView infoTextView;
 
@@ -49,6 +50,8 @@ public class MainActivity extends Activity implements ResponseListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         infoTextView = (TextView)findViewById(R.id.info);
+
+        Logger.setSDKInternalLoggingEnabled(true);
 
         /*
             There may be issues with the hash key for the app, because it may not be correct when using from command line
@@ -77,6 +80,7 @@ public class MainActivity extends Activity implements ResponseListener
 
         // Register the default delegate for Facebook
         FacebookAuthenticationManager.getInstance().register(this);
+        Logger.setSDKInternalLoggingEnabled(true);
     }
 
     @Override
