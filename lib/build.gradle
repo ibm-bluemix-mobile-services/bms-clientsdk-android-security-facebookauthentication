@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'maven'
+apply plugin: 'signing'
 
 android {
     compileSdkVersion 23
@@ -34,10 +35,13 @@ task generateJavadoc(type: Javadoc) {
 
     exclude '**/BuildConfig.java'
     exclude '**/R.java'
+    exclude '**/internal/**'
 
     options.links 'http://docs.oracle.com/javase/7/docs/api/'
 
     options.encoding 'UTF-8'
+
+    options.memberLevel = JavadocMemberLevel.PUBLIC
 
     setTitle 'Bluemix Mobile Services Facebook OAuth Android API'
 }
@@ -57,12 +61,17 @@ artifacts {
     archives androidJavadocsJar
 }
 
+signing {
+    required { isReleaseBuild() }
+    sign configurations.archives
+}
+
 def getRepositoryUsername() {
-    return hasProperty('ossrhUsername') ? ossrhUsername : ""
+    return hasProperty('ossrhUsername') ? ossrhUsername : ''
 }
 
 def getRepositoryPassword() {
-    return hasProperty('ossrhPassword') ? ossrhPassword : ""
+    return hasProperty('ossrhPassword') ? ossrhPassword : ''
 }
 
 def getReleaseRepositoryUrl() {
@@ -84,7 +93,7 @@ def getVersion() {
 uploadArchives {
     repositories {
         mavenDeployer {
-//            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
 
             repository(url: getReleaseRepositoryUrl()) {
                 authentication(userName: getRepositoryUsername(), password: getRepositoryPassword())
@@ -114,6 +123,13 @@ uploadArchives {
                         name 'The Apache Software License, Version 2.0'
                         url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
                         distribution 'repo'
+                    }
+                }
+
+                developers {
+                    developer {
+                        name 'IBM Bluemix Services Mobile SDK'
+                        email 'mobilsdk@us.ibm.com'
                     }
                 }
             }
