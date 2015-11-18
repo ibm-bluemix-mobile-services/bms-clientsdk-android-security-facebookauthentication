@@ -2,6 +2,34 @@
 <items version="2" >
 
     <item
+        jar="/Users/iklein/AndroidStudioProjects/bms-clientsdk-android-security-facebookauthentication/app/build/intermediates/exploded-aar/com.ibm.mobilefirstplatform.clientsdk.android/core/1.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="d76b126912cef26d8d46cfeb4bcf12a271158ffe">
+        <dex dex="/Users/iklein/AndroidStudioProjects/bms-clientsdk-android-security-facebookauthentication/app/build/intermediates/pre-dexed/debug/classes-fabded4c9f87f8b07a8ad61a4939617f55ad56e4.jar" />
+    </item>
+    <item
+        jar="/Users/iklein/AndroidStudioProjects/bms-clientsdk-android-security-facebookauthentication/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/jars/libs/internal_impl-22.2.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="c471eaaba13ff64f6e0383d1c30a9cdc9a97efeb">
+        <dex dex="/Users/iklein/AndroidStudioProjects/bms-clientsdk-android-security-facebookauthentication/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.1-6380a5cc7a682fe4e3e5cac7873668b777013c43.jar" />
+    </item>
+    <item
+        jar="/Users/iklein/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.4.0/5b72bf48563ea8410e650de14aa33ff69a3e8c35/okio-1.4.0.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="5b72bf48563ea8410e650de14aa33ff69a3e8c35">
+        <dex dex="/Users/iklein/AndroidStudioProjects/bms-clientsdk-android-security-facebookauthentication/app/build/intermediates/pre-dexed/debug/okio-1.4.0-cfdc52c9ac15adbb82fa46455df4ef0963104dd1.jar" />
+    </item>
+    <item
+        jar="/Users/iklein/AndroidStudioProjects/bms-clientsdk-android-security-facebookauthentication/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="15ad6a46fb8e2ed86556e0b330d738b589dc62c7">
+        <dex dex="/Users/iklein/AndroidStudioProjects/bms-clientsdk-android-security-facebookauthentication/app/build/intermediates/pre-dexed/debug/classes-a79242b0dec7fa9e6a7e4da7cbaab85ff77ab062.jar" />
+    </item>
+    <item
         jar="/Users/iklein/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp/okhttp/2.4.0/40340c0748190fe897baf7bffbc1b282734294e5/okhttp-2.4.0.jar"
         jumboMode="false"
         revision="23.0.1"
@@ -16,25 +44,11 @@
         <dex dex="/Users/iklein/AndroidStudioProjects/bms-clientsdk-android-security-facebookauthentication/app/build/intermediates/pre-dexed/debug/support-annotations-22.2.1-5f4ab49192918ce6043373a06b6a9855f76e4da7.jar" />
     </item>
     <item
-        jar="/Users/iklein/AndroidStudioProjects/bms-clientsdk-android-security-facebookauthentication/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/jars/libs/internal_impl-22.2.1.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="c471eaaba13ff64f6e0383d1c30a9cdc9a97efeb">
-        <dex dex="/Users/iklein/AndroidStudioProjects/bms-clientsdk-android-security-facebookauthentication/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.1-6380a5cc7a682fe4e3e5cac7873668b777013c43.jar" />
-    </item>
-    <item
         jar="/Users/iklein/AndroidStudioProjects/bms-clientsdk-android-security-facebookauthentication/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/jars/classes.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="f8efd0096475e0daf054267b61544e10dc776503">
         <dex dex="/Users/iklein/AndroidStudioProjects/bms-clientsdk-android-security-facebookauthentication/app/build/intermediates/pre-dexed/debug/classes-4725fa4fc53ecfa704d4680afef930ff828a6047.jar" />
-    </item>
-    <item
-        jar="/Users/iklein/AndroidStudioProjects/bms-clientsdk-android-security-facebookauthentication/app/build/intermediates/exploded-aar/bms-clientsdk-android-security-facebookauthentication/lib/unspecified/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="476e5bc83177fab971298d92ea474c721ac6412a">
-        <dex dex="/Users/iklein/AndroidStudioProjects/bms-clientsdk-android-security-facebookauthentication/app/build/intermediates/pre-dexed/debug/classes-52079e7f97c22a370c93814aa376988f0e066725.jar" />
     </item>
     <item
         jar="/Users/iklein/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-android/1.2.0/6ee2953ccf51ce72b6d548c30c4633b99eb4f9dd/bolts-android-1.2.0.jar"
@@ -44,25 +58,11 @@
         <dex dex="/Users/iklein/AndroidStudioProjects/bms-clientsdk-android-security-facebookauthentication/app/build/intermediates/pre-dexed/debug/bolts-android-1.2.0-a56e8df03e5dec608306cf8dd7f026da51929475.jar" />
     </item>
     <item
-        jar="/Users/iklein/AndroidStudioProjects/bms-clientsdk-android-security-facebookauthentication/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.5.0/jars/classes.jar"
+        jar="/Users/iklein/AndroidStudioProjects/bms-clientsdk-android-security-facebookauthentication/app/build/intermediates/exploded-aar/bms-clientsdk-android-security-facebookauthentication/lib/unspecified/jars/classes.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="15ad6a46fb8e2ed86556e0b330d738b589dc62c7">
-        <dex dex="/Users/iklein/AndroidStudioProjects/bms-clientsdk-android-security-facebookauthentication/app/build/intermediates/pre-dexed/debug/classes-a79242b0dec7fa9e6a7e4da7cbaab85ff77ab062.jar" />
-    </item>
-    <item
-        jar="/Users/iklein/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.4.0/5b72bf48563ea8410e650de14aa33ff69a3e8c35/okio-1.4.0.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="5b72bf48563ea8410e650de14aa33ff69a3e8c35">
-        <dex dex="/Users/iklein/AndroidStudioProjects/bms-clientsdk-android-security-facebookauthentication/app/build/intermediates/pre-dexed/debug/okio-1.4.0-cfdc52c9ac15adbb82fa46455df4ef0963104dd1.jar" />
-    </item>
-    <item
-        jar="/Users/iklein/AndroidStudioProjects/bms-clientsdk-android-security-facebookauthentication/app/build/intermediates/exploded-aar/com.ibm.mobilefirstplatform.clientsdk.android/core/1.1.1-SNAPSHOT/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="fcec732fa277da7248184009342131f37509d381">
-        <dex dex="/Users/iklein/AndroidStudioProjects/bms-clientsdk-android-security-facebookauthentication/app/build/intermediates/pre-dexed/debug/classes-ca072aeab08a2d2dbae52cf2fb748bba4f33d024.jar" />
+        sha1="f70968111a4802de0889c6f06160aabfece29c65">
+        <dex dex="/Users/iklein/AndroidStudioProjects/bms-clientsdk-android-security-facebookauthentication/app/build/intermediates/pre-dexed/debug/classes-52079e7f97c22a370c93814aa376988f0e066725.jar" />
     </item>
 
 </items>

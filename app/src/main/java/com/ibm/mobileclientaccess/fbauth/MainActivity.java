@@ -40,8 +40,8 @@ public class MainActivity extends Activity implements ResponseListener
 {
     //private final String
 
-    private final String backendRoute = "http://ilan4-fb-ng.mybluemix.net";
-    private final String backendGUID = "cda8270a-2606-450d-a740-17f67c3f5502";
+    private final String backendRoute = "http://ilanAuth1.mybluemix.net";
+    private final String backendGUID = "1731d3ab-3553-4701-b081-e5844fdd42b1";
 
     private TextView infoTextView;
 
