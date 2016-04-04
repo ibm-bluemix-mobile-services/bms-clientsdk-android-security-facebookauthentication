@@ -25,9 +25,11 @@ import com.facebook.login.LoginBehavior;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.ibm.mobilefirstplatform.clientsdk.android.core.api.BMSClient;
+import com.ibm.mobilefirstplatform.clientsdk.android.core.api.ResponseListener;
 import com.ibm.mobilefirstplatform.clientsdk.android.logger.api.Logger;
 import com.ibm.mobilefirstplatform.clientsdk.android.security.api.AuthenticationContext;
 import com.ibm.mobilefirstplatform.clientsdk.android.security.api.AuthenticationListener;
+import com.ibm.mobilefirstplatform.clientsdk.android.security.api.AuthorizationManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -119,6 +121,16 @@ public class FacebookAuthenticationManager implements
         callbackmanager.onActivityResult(requestCode, resultCode, data);
     }
 
+    /**
+     * Logs out current logged-in user from Google
+     * @param context context to pass for request resources
+     * @param listener Response listener
+     */
+
+    public void logout(Context context, ResponseListener listener){
+        LoginManager.getInstance().logOut();
+        AuthorizationManager.getInstance().logout(context, listener);
+    }
     //////////////////////////////// Public API /////////////////////////////////////////
 
     /**
