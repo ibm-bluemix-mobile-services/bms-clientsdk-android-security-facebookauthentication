@@ -27,8 +27,8 @@ import com.ibm.mobilefirstplatform.clientsdk.android.core.api.BMSClient;
 import com.ibm.mobilefirstplatform.clientsdk.android.core.api.Response;
 import com.ibm.mobilefirstplatform.clientsdk.android.core.api.ResponseListener;
 import com.ibm.mobilefirstplatform.clientsdk.android.logger.api.Logger;
-import com.ibm.mobilefirstplatform.clientsdk.android.security.api.AuthorizationManager;
 import com.ibm.mobilefirstplatform.clientsdk.android.security.facebookauthentication.FacebookAuthenticationManager;
+import com.ibm.mobilefirstplatform.clientsdk.android.security.mca.api.MCAAuthorizationManager;
 
 import org.json.JSONObject;
 
@@ -51,7 +51,7 @@ public class MainActivity extends Activity implements ResponseListener
         setContentView(R.layout.activity_main);
         infoTextView = (TextView)findViewById(R.id.info);
 
-        Logger.setSDKInternalLoggingEnabled(true);
+        Logger.setSDKDebugLoggingEnabled(true);
 
         /*
             There may be issues with the hash key for the app, because it may not be correct when using from command line
@@ -73,14 +73,14 @@ public class MainActivity extends Activity implements ResponseListener
 
         try {
             //Register to the server with backendroute and GUID
-            BMSClient.getInstance().initialize(this, backendRoute,backendGUID);
+            BMSClient.getInstance().initialize(this, backendRoute,backendGUID,BMSClient.REGION_UK);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
 
         // Register the default delegate for Facebook
         FacebookAuthenticationManager.getInstance().register(this);
-        Logger.setSDKInternalLoggingEnabled(true);
+        Logger.setSDKDebugLoggingEnabled(true);
     }
 
     @Override
@@ -98,7 +98,7 @@ public class MainActivity extends Activity implements ResponseListener
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                viewById.setText("User: " + AuthorizationManager.getInstance().getUserIdentity().getDisplayName());
+                viewById.setText("User: " + MCAAuthorizationManager.getInstance().getUserIdentity().getDisplayName());
             }
         });
     }
@@ -111,7 +111,7 @@ public class MainActivity extends Activity implements ResponseListener
 
     public void onLogin(View view){
         setStatus("Obtain Authorization Header...");
-        AuthorizationManager.getInstance().obtainAuthorizationHeader(this, this);
+        MCAAuthorizationManager.getInstance().obtainAuthorization(this,this);
     }
 
     private void setStatus(final String text){
