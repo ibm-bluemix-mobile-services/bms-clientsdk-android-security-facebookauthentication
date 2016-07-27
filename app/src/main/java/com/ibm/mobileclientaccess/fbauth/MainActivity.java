@@ -51,6 +51,8 @@ public class MainActivity extends Activity implements ResponseListener
         setContentView(R.layout.activity_main);
         infoTextView = (TextView)findViewById(R.id.info);
 
+        MCAAuthorizationManager.createInstance(this);
+
         Logger.setSDKDebugLoggingEnabled(true);
 
         /*
@@ -77,6 +79,8 @@ public class MainActivity extends Activity implements ResponseListener
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
+
+
 
         // Register the default delegate for Facebook
         FacebookAuthenticationManager.getInstance().register(this);
