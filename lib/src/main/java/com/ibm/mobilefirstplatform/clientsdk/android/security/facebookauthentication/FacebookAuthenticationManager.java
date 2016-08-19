@@ -24,12 +24,11 @@ import com.facebook.FacebookSdk;
 import com.facebook.login.LoginBehavior;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
-import com.ibm.mobilefirstplatform.clientsdk.android.core.api.BMSClient;
 import com.ibm.mobilefirstplatform.clientsdk.android.core.api.ResponseListener;
 import com.ibm.mobilefirstplatform.clientsdk.android.logger.api.Logger;
-import com.ibm.mobilefirstplatform.clientsdk.android.security.api.AuthenticationContext;
-import com.ibm.mobilefirstplatform.clientsdk.android.security.api.AuthenticationListener;
-import com.ibm.mobilefirstplatform.clientsdk.android.security.api.AuthorizationManager;
+import com.ibm.mobilefirstplatform.clientsdk.android.security.mca.api.AuthenticationContext;
+import com.ibm.mobilefirstplatform.clientsdk.android.security.mca.api.AuthenticationListener;
+import com.ibm.mobilefirstplatform.clientsdk.android.security.mca.api.MCAAuthorizationManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -41,6 +40,7 @@ import java.util.List;
  * Class implementation for managing the Facebook OAuth listener.
  * This class registers to AuthenticationListener in order to handle authentication requests
  */
+
 public class FacebookAuthenticationManager implements
         AuthenticationListener {
     private Logger logger;
@@ -90,7 +90,7 @@ public class FacebookAuthenticationManager implements
      * private constructor for singleton
      */
     private FacebookAuthenticationManager() {
-        this.logger = Logger.getInstance(Logger.INTERNAL_PREFIX + FacebookAuthenticationManager.class.getSimpleName());
+        this.logger = Logger.getLogger(Logger.INTERNAL_PREFIX + FacebookAuthenticationManager.class.getSimpleName());
         callbackmanager = CallbackManager.Factory.create();
     }
 
@@ -106,7 +106,7 @@ public class FacebookAuthenticationManager implements
         FacebookSdk.sdkInitialize(ctx);
 
         //register as authListener
-        BMSClient.getInstance().registerAuthenticationListener(FACEBOOK_REALM, this);
+        MCAAuthorizationManager.getInstance().registerAuthenticationListener(FACEBOOK_REALM, this);
     }
 
     /**
@@ -129,7 +129,7 @@ public class FacebookAuthenticationManager implements
 
     public void logout(Context context, ResponseListener listener){
         LoginManager.getInstance().logOut();
-        AuthorizationManager.getInstance().logout(context, listener);
+        MCAAuthorizationManager.getInstance().logout(context,listener);
     }
     //////////////////////////////// Public API /////////////////////////////////////////
 
