@@ -122,7 +122,7 @@ public class FacebookAuthenticationManager implements
     }
 
     /**
-     * Logs out current logged-in user from Google
+     * Logs out current logged-in user from Facebook
      * @param context context to pass for request resources
      * @param listener Response listener
      */

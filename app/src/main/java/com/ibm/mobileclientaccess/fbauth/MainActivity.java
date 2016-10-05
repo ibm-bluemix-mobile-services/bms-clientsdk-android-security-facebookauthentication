@@ -40,8 +40,8 @@ public class MainActivity extends Activity implements ResponseListener
 {
     //private final String
 
-    private final String backendRoute = "http://ilanAuth1.mybluemix.net";
-    private final String backendGUID = "1731d3ab-3553-4701-b081-e5844fdd42b1";
+    private final String backendRoute = "https://FacebookAndroidTest.mybluemix.net";
+    private final String mcaTenantId = "7ab4325c-5eb9-408f-8a14-ba2febd92b20";
 
     private TextView infoTextView;
 
@@ -50,11 +50,8 @@ public class MainActivity extends Activity implements ResponseListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         infoTextView = (TextView)findViewById(R.id.info);
-
-        MCAAuthorizationManager.createInstance(this);
-
+        MCAAuthorizationManager.createInstance(this, mcaTenantId);
         Logger.setSDKDebugLoggingEnabled(true);
-
         /*
             There may be issues with the hash key for the app, because it may not be correct when using from command line
             https://developers.facebook.com/docs/android/getting-started#release-key-hash (troubleshoot section)
@@ -73,15 +70,8 @@ public class MainActivity extends Activity implements ResponseListener
         } catch (NoSuchAlgorithmException e) {
         }
 
-        try {
-            //Register to the server with backendroute and GUID
-            BMSClient.getInstance().initialize(this, backendRoute,backendGUID,BMSClient.REGION_UK);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-
-
-
+        BMSClient.getInstance().initialize(this,BMSClient.REGION_US_SOUTH);
+        BMSClient.getInstance().setAuthorizationManager(MCAAuthorizationManager.getInstance());
         // Register the default delegate for Facebook
         FacebookAuthenticationManager.getInstance().register(this);
         Logger.setSDKDebugLoggingEnabled(true);

@@ -4,3 +4,4 @@
 /app/build
 /build
 /.gradle
+.sonar
